@@ -104,7 +104,7 @@ this.getUnit = function (input) {
         break;
     }
     
-    return result.toFixed(5);
+    return parseFloat(result.toFixed(5));
   };
 
   this.getString = function (initNum, initUnit, returnNum, returnUnit) {
