@@ -11,7 +11,6 @@ suite("Functional Tests", function () {
       .request(server)
       .get("/api/convert?input=10L")
       .end(function (err, res) {
-        console.log(res.body)
         assert.property(res.body, "initNum");
         assert.property(res.body, "initUnit");
         assert.property(res.body, "returnNum");
@@ -62,4 +61,8 @@ suite("Functional Tests", function () {
         done();
       });
   });
+});
+
+teardown(function () {
+  chai.request(server).get("/");
 });

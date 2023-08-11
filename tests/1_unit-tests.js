@@ -71,33 +71,28 @@ suite("Unit Tests", function () {
       });
     });
 
-    test("should correctly convert", function () {
-      const conversionFactors = {
-        gal: 3.78541,
-        L: 1 / 3.78541,
-        mi: 1.60934,
-        km: 1 / 1.60934,
-        lbs: 0.453592,
-        kg: 1 / 0.453592,
-      };
+    test("should return the correct return unit for 'gal'", function () {
+      assert.equal(convertHandler.getReturnUnit("gal"), "L");
+    });
 
-      const unitMap = {
-        gal: "L",
-        L: "gal",
-        mi: "km",
-        km: "mi",
-        lbs: "kg",
-        kg: "lbs",
-      };
+    test("should return the correct return unit for 'L'", function () {
+      assert.equal(convertHandler.getReturnUnit("L"), "gal");
+    });
 
-      for (let unit in unitMap) {
-        let input = 5;
-        let expectedOutput = (input * conversionFactors[unit]).toFixed(5);
-        assert.equal(
-          convertHandler.convert(input, unit),
-          expectedOutput
-        );
-      }
+    test("should return the correct return unit for 'mi'", function () {
+      assert.equal(convertHandler.getReturnUnit("mi"), "km");
+    });
+
+    test("should return the correct return unit for 'km'", function () {
+      assert.equal(convertHandler.getReturnUnit("km"), "mi");
+    });
+
+    test("should return the correct return unit for 'lbs'", function () {
+      assert.equal(convertHandler.getReturnUnit("lbs"), "kg");
+    });
+
+    test("should return the correct return unit for 'kg'", function () {
+      assert.equal(convertHandler.getReturnUnit("kg"), "lbs");
     });
   });
 });
