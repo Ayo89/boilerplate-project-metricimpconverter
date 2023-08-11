@@ -31,8 +31,8 @@ function ConvertHandler() {
   this.getReturnUnit = function (initUnit) {
     let result;
     const unitMap = {
-      gal: "l",
-      l: "gal",
+      gal: "L",
+      L: "gal",
       mi: "km",
       km: "mi",
       lbs: "kg",
@@ -94,9 +94,7 @@ function ConvertHandler() {
       initUnit,
       returnNum,
       returnUnit,
-      string: `${initNum} ${this.spellOutUnit(initUnit)} converts to ${
-        typeof returnNum !== "number" ? "invalid unit" : returnNum
-      } ${this.spellOutUnit(returnUnit)}`,
+      string: `${initNum} ${this.spellOutUnit(initUnit)} converts to ${returnNum} ${this.spellOutUnit(returnUnit)}`,
     };
 
     return result;
