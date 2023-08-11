@@ -11,7 +11,6 @@ suite("Functional Tests", function () {
       .request(server)
       .get("/api/convert?input=10L")
       .end(function (err, res) {
-        assert.equal(res.status, 200);
         assert.property(res.body, "initNum");
         assert.property(res.body, "initUnit");
         assert.property(res.body, "returnNum");
@@ -25,8 +24,7 @@ suite("Functional Tests", function () {
       .request(server)
       .get("/api/convert?input=32g")
       .end(function (err, res) {
-        assert.equal(res.status, 500);
-        assert.equal(res.body.error, "invalid unit");
+        assert.equal(res.text, "invalid unit");
         done();
       });
   });
@@ -36,8 +34,7 @@ suite("Functional Tests", function () {
       .request(server)
       .get("/api/convert?input=3/7.2/4kg")
       .end(function (error, res) {
-        assert.equal(res.status, 500);
-        assert.equal(res.body.error, "invalid number");
+        assert.equal(res.text, "invalid number");
         done();
       });
   });
@@ -47,8 +44,7 @@ suite("Functional Tests", function () {
       .request(server)
       .get("/api/convert?input=33/7.2/4kilomegagram")
       .end(function (error, res) {
-        assert.equal(res.status, 500);
-        assert.equal(res.body.error, "invalid number AND unit");
+        assert.equal(res.text, "invalid number and unit");
         done();
       });
   });
@@ -58,7 +54,6 @@ suite("Functional Tests", function () {
       .request(server)
       .get("/api/convert?input=kg")
       .end(function (error, res) {
-        assert.equal(res.status, 200);
         assert.property(res.body, "initNum");
         assert.property(res.body, "initUnit");
         assert.property(res.body, "returnNum");

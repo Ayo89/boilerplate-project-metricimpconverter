@@ -52,7 +52,7 @@ this.getUnit = function (input) {
   this.getReturnUnit = function (initUnit) {
     let result;
     const unitMap = {
-      gal: "l",
+      gal: "L",
       L: "gal",
       mi: "km",
       km: "mi",
@@ -67,7 +67,7 @@ this.getUnit = function (input) {
     let result;
     const unitNames = {
       gal: "gallons",
-      l: "liters",
+      L: "liters",
       mi: "miles",
       km: "kilometers",
       lbs: "pounds",
@@ -109,13 +109,16 @@ this.getUnit = function (input) {
 
   this.getString = function (initNum, initUnit, returnNum, returnUnit) {
     let result;
+    if(initNum === "invalid number" && initUnit === "invalid unit"){
+      return 'invalid number and unit';
+    }
     result = {
       initNum,
       initUnit,
       returnNum,
       returnUnit,
       string: `${initNum} ${this.spellOutUnit(initUnit)} converts to ${
-        returnNum === "invalid number" ? "invalid number" : returnNum
+        returnNum === "invalid number" ? "invalid number" : parseFloat(returnNum)
       } ${this.spellOutUnit(returnUnit)}`,
     };
 

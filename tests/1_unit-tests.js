@@ -45,7 +45,7 @@ suite("Unit Tests", function () {
 
     test("should return the correct return unit for each valid input unit.", function () {
       const unitMap = {
-        gal: "l",
+        gal: "L",
         L: "gal",
         mi: "km",
         km: "mi",
@@ -60,7 +60,7 @@ suite("Unit Tests", function () {
     test(" should correctly return the spelled-out string unit for each valid input unit.", function () {
       const unitNames = {
         gal: "gallons",
-        l: "liters",
+        L: "liters",
         mi: "miles",
         km: "kilometers",
         lbs: "pounds",
@@ -82,7 +82,7 @@ suite("Unit Tests", function () {
       };
 
       const unitMap = {
-        gal: "l",
+        gal: "L",
         L: "gal",
         mi: "km",
         km: "mi",
