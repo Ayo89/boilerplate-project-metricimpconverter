@@ -74,7 +74,7 @@ suite("Unit Tests", function () {
     test("should correctly convert", function () {
       const conversionFactors = {
         gal: 3.78541,
-        L: 1 / 3.78541,
+        l: 1 / 3.78541,
         mi: 1.60934,
         km: 1 / 1.60934,
         lbs: 0.453592,
@@ -82,8 +82,8 @@ suite("Unit Tests", function () {
       };
 
       const unitMap = {
-        gal: "L",
-        L: "gal",
+        gal: "l",
+        l: "gal",
         mi: "km",
         km: "mi",
         lbs: "kg",
