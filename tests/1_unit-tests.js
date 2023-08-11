@@ -45,8 +45,8 @@ suite("Unit Tests", function () {
 
     test("should return the correct return unit for each valid input unit.", function () {
       const unitMap = {
-        gal: "L",
-        L: "gal",
+        gal: "l",
+        l: "gal",
         mi: "km",
         km: "mi",
         lbs: "kg",
