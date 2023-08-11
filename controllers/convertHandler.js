@@ -83,7 +83,7 @@ function ConvertHandler() {
         break;
     }
 
-    return result;
+    return result.toFixed(5);
   };
   console.log(this.getUnit("32g"));
 
@@ -95,7 +95,7 @@ function ConvertHandler() {
       returnNum,
       returnUnit,
       string: `${initNum} ${this.spellOutUnit(initUnit)} converts to ${
-        typeof returnNum !== "number" ? "invalid unit" : returnNum.toFixed(5)
+        typeof returnNum !== "number" ? "invalid unit" : returnNum
       } ${this.spellOutUnit(returnUnit)}`,
     };
 

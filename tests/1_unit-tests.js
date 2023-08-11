@@ -42,5 +42,62 @@ suite("Unit Tests", function () {
     test("should correctly return an error for an invalid input unit", function () {
       assert.equal(convertHandler.getUnit("5gall"), "invalid unit");
     });
+
+    test("should return the correct return unit for each valid input unit.", function () {
+      const unitMap = {
+        gal: "l",
+        l: "gal",
+        mi: "km",
+        km: "mi",
+        lbs: "kg",
+        kg: "lbs",
+      };
+      Object.keys(unitMap).forEach((unit) => {
+        assert.equal(convertHandler.getReturnUnit(unit), unitMap[unit]);
+      });
+    });
+
+    test(" should correctly return the spelled-out string unit for each valid input unit.", function () {
+      const unitNames = {
+        gal: "gallons",
+        l: "liters",
+        mi: "miles",
+        km: "kilometers",
+        lbs: "pounds",
+        kg: "kilograms",
+      };
+      Object.keys(unitNames).forEach((unit) => {
+        assert.equal(convertHandler.spellOutUnit(unit), unitNames[unit]);
+      });
+    });
+
+    test("should correctly convert", function () {
+      const conversionFactors = {
+        gal: 3.78541,
+        l: 1 / 3.78541,
+        mi: 1.60934,
+        km: 1 / 1.60934,
+        lbs: 0.453592,
+        kg: 1 / 0.453592,
+      };
+
+      const unitMap = {
+        gal: "l",
+        l: "gal",
+        mi: "km",
+        km: "mi",
+        lbs: "kg",
+        kg: "lbs",
+      };
+
+      for (let unit in unitMap) {
+        let input = 5;
+        let expectedOutput = (input * conversionFactors[unit]).toFixed(5);
+        assert.equal(
+          convertHandler.convert(input, unit),
+          expectedOutput
+        );
+      }
+    });
   });
 });
