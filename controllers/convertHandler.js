@@ -17,7 +17,7 @@ function ConvertHandler() {
 
   this.getUnit = function (input) {
     let result;
-    const validUnits = ["gal", "l", "mi", "km", "lbs", "kg"];
+    const validUnits = ["gal", "L", "mi", "km", "lbs", "kg"];
     const unitRegex = /[a-zA-Z]+$/;
     result = input.match(unitRegex);
 
@@ -56,7 +56,7 @@ function ConvertHandler() {
     return result;
   };
 
-  this.convert = function (initNum, initUnit) {
+  this.convert = function (initUnit, initNum = 1) {
     const galToL = 3.78541;
     const lbsToKg = 0.453592;
     const miToKm = 1.60934;
@@ -72,7 +72,7 @@ function ConvertHandler() {
       case "mi":
         result = initNum * miToKm;
         break;
-      case "l":
+      case "L":
         result = initNum / galToL;
         break;
       case "kg":
@@ -85,7 +85,7 @@ function ConvertHandler() {
 
     return result.toFixed(5);
   };
-  console.log(this.getUnit("32g"));
+  console.log(this.convert('L'))
 
   this.getString = function (initNum, initUnit, returnNum, returnUnit) {
     let result;
