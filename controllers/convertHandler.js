@@ -17,7 +17,7 @@ function ConvertHandler() {
 
   this.getUnit = function (input) {
     let result;
-    const validUnits = ["gal", "L", "mi", "km", "lbs", "kg"];
+    const validUnits = ["gal", "l", "mi", "km", "lbs", "kg"];
     const unitRegex = /[a-zA-Z]+$/;
     result = input.match(unitRegex);
 
@@ -31,8 +31,8 @@ function ConvertHandler() {
   this.getReturnUnit = function (initUnit) {
     let result;
     const unitMap = {
-      gal: "L",
-      L: "gal",
+      gal: "l",
+      l: "gal",
       mi: "km",
       km: "mi",
       lbs: "kg",
@@ -56,7 +56,7 @@ function ConvertHandler() {
     return result;
   };
 
-  this.convert = function (initUnit, initNum = 1) {
+  this.convert = function (initNum, initUnit) {
     const galToL = 3.78541;
     const lbsToKg = 0.453592;
     const miToKm = 1.60934;
@@ -72,7 +72,7 @@ function ConvertHandler() {
       case "mi":
         result = initNum * miToKm;
         break;
-      case "L":
+      case "l":
         result = initNum / galToL;
         break;
       case "kg":
@@ -85,7 +85,7 @@ function ConvertHandler() {
 
     return result.toFixed(5);
   };
-  console.log(this.convert('L'))
+  console.log(this.getUnit("32g"));
 
   this.getString = function (initNum, initUnit, returnNum, returnUnit) {
     let result;
@@ -94,7 +94,9 @@ function ConvertHandler() {
       initUnit,
       returnNum,
       returnUnit,
-      string: `${initNum} ${this.spellOutUnit(initUnit)} converts to ${returnNum} ${this.spellOutUnit(returnUnit)}`,
+      string: `${initNum} ${this.spellOutUnit(initUnit)} converts to ${
+        typeof returnNum !== "number" ? "invalid unit" : returnNum
+      } ${this.spellOutUnit(returnUnit)}`,
     };
 
     return result;
