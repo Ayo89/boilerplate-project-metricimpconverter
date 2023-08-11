@@ -12,7 +12,6 @@ suite("Functional Tests", function () {
       .get("/api/convert?input=10L")
       .end(function (err, res) {
         assert.equal(res.status, 200);
-        console.log(res.body);
         assert.property(res.body, "initNum");
         assert.property(res.body, "initUnit");
         assert.property(res.body, "returnNum");

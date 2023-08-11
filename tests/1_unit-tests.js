@@ -33,7 +33,7 @@ suite("Unit Tests", function () {
 
   suite("Function convertHandler.getUnit(input)", function () {
     test("should correctly read each valid input unit", function () {
-      const units = ["gal", "l", "mi", "km", "lbs", "kg"];
+      const units = ["gal", "L", "mi", "km", "lbs", "kg"];
       units.forEach((unit) => {
         assert.equal(convertHandler.getUnit(`5${unit}`), unit);
       });
@@ -46,7 +46,7 @@ suite("Unit Tests", function () {
     test("should return the correct return unit for each valid input unit.", function () {
       const unitMap = {
         gal: "l",
-        l: "gal",
+        L: "gal",
         mi: "km",
         km: "mi",
         lbs: "kg",
@@ -74,7 +74,7 @@ suite("Unit Tests", function () {
     test("should correctly convert", function () {
       const conversionFactors = {
         gal: 3.78541,
-        l: 1 / 3.78541,
+        L: 1 / 3.78541,
         mi: 1.60934,
         km: 1 / 1.60934,
         lbs: 0.453592,
@@ -83,7 +83,7 @@ suite("Unit Tests", function () {
 
       const unitMap = {
         gal: "l",
-        l: "gal",
+        L: "gal",
         mi: "km",
         km: "mi",
         lbs: "kg",

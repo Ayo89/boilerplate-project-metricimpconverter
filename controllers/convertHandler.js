@@ -1,38 +1,59 @@
 function ConvertHandler() {
-  this.getNum = function (input) {
-    let result;
-    const regex = /^[\d+\-*/.]+$/;
-    const doubleFractionRegex = /\/.*\//;
-    filter = Array.from(input).filter((char) => regex.test(char));
-    result = filter.join("");
-    result = eval(result);
-    if (doubleFractionRegex.test(input)) {
-      return "invalid number";
-    }
-    if (isNaN(result)) {
-      result = 1;
-    }
-    return result;
-  };
+this.getNum = function (input) {
+  let result;
+  const regex = /^[\d+\-*/.]+/;
+  const fractionRegex = /^(\d*(?:\.\d+)?)(?:\/(\d*(?:\.\d+)?))?$/;
+  const doubleFractionRegex = /\/.*\//;
 
-  this.getUnit = function (input) {
-    let result;
-    const validUnits = ["gal", "l", "mi", "km", "lbs", "kg"];
-    const unitRegex = /[a-zA-Z]+$/;
-    result = input.match(unitRegex);
+  const numString = input.split(/[a-zA-Z]/)[0]; // Split input to get the number string
 
-    if (result && validUnits.includes(result[0].toLowerCase())) {
-      return result[0].toLowerCase();
-    } else {
-      return "invalid unit";
+  if (doubleFractionRegex.test(numString)) {
+    return "invalid number";
+  }
+
+  if (!numString) {
+    return 1; // Default value if no number is provided
+  }
+
+  const fractionMatch = numString.match(fractionRegex);
+  if (!fractionMatch) {
+    return "invalid number";
+  }
+
+  if (fractionMatch[2]) {
+    // If there's a denominator in the fraction
+    result = parseFloat(fractionMatch[1]) / parseFloat(fractionMatch[2]);
+  } else {
+    result = parseFloat(fractionMatch[1]);
+  }
+
+  return isNaN(result) ? "invalid number" : result;
+};
+
+this.getUnit = function (input) {
+  let result;
+  const validUnits = ["gal", "l", "mi", "km", "lbs", "kg"];
+  const unitRegex = /[a-zA-Z]+$/;
+  result = input.match(unitRegex);
+
+  if (result) {
+    const unit = result[0].toLowerCase();
+    if (unit === "l") {
+      return "L"; 
     }
-  };
+    if (validUnits.includes(unit)) {
+      return unit;
+    }
+  }
+
+  return "invalid unit";
+};
 
   this.getReturnUnit = function (initUnit) {
     let result;
     const unitMap = {
       gal: "l",
-      l: "gal",
+      L: "gal",
       mi: "km",
       km: "mi",
       lbs: "kg",
@@ -64,28 +85,27 @@ function ConvertHandler() {
 
     switch (initUnit) {
       case "gal":
-        result = initNum * galToL;
+        result = parseFloat(initNum * galToL);
         break;
       case "lbs":
-        result = initNum * lbsToKg;
+        result = parseFloat(initNum * lbsToKg);
         break;
       case "mi":
-        result = initNum * miToKm;
+        result = parseFloat(initNum * miToKm);
         break;
-      case "l":
-        result = initNum / galToL;
+      case "L":
+        result = parseFloat(initNum / galToL);
         break;
       case "kg":
-        result = initNum / lbsToKg;
+        result = parseFloat(initNum / lbsToKg);
         break;
       case "km":
-        result = initNum / miToKm;
+        result = parseFloat(initNum / miToKm);
         break;
     }
-
+    
     return result.toFixed(5);
   };
-  console.log(this.getUnit("32g"));
 
   this.getString = function (initNum, initUnit, returnNum, returnUnit) {
     let result;
@@ -95,12 +115,13 @@ function ConvertHandler() {
       returnNum,
       returnUnit,
       string: `${initNum} ${this.spellOutUnit(initUnit)} converts to ${
-        typeof returnNum !== "number" ? "invalid unit" : returnNum
+        returnNum === "invalid number" ? "invalid number" : returnNum
       } ${this.spellOutUnit(returnUnit)}`,
     };
 
     return result;
   };
+
 }
 
 module.exports = ConvertHandler;
